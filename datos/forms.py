@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Usuario
+from .models import Usuario, Curso
 
 
 class BootstrapFormMixin:
@@ -30,3 +30,12 @@ class RegistroUsuarioForm(UserCreationForm):
         self.fields['username'].label = 'Nombre de usuario'
         self.fields['password1'].label = 'Contrasena'
         self.fields['password2'].label = 'Confirma Contrasena'
+
+class CursoForm(BootstrapFormMixin, forms.ModelForm):
+    class Meta:
+        model = Curso
+        fields = ['nombre', 'descripcion', 'fecha_fin', 'fecha_fin', 'cupos', 'estado']
+        widgets = {
+            'fecha_inicio': forms.DateInput(attrs={'type': 'date'}),
+            'fecha_fin': forms.DateInput(attrs={'type': 'date'}),
+        }

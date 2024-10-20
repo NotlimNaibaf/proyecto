@@ -130,3 +130,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'datos.Usuario'
+LOGIN_REDIRECT_URL = 'lista_cursos'
+LOGOUT_REDIRECT_URL = 'login'

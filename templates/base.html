@@ -15,12 +15,40 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="#">Datos</a> <!-- hacer enlace a lista de cursos-->
+        <a class="navbar-brand" href="{% url 'lista_cursos' %}">Datos</a> <!-- hacer enlace a lista de cursos-->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- hacer litsa de opciones segun validacion del ususario-->
-        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                {% if user.is_authenticated %}
+                   <li class="nav-item">
+                        <a class="nav-link" href="{% url 'lista_cursos' %}">Cursos</a>
+                    </li> 
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'mis_cursos' %}">Mis Cursos</a>
+                    </li>
+                    {% if user.rol == 'admin' %}
+                        <li class="nav-item">
+                        <a class="nav-link" href="{% url 'crear_cursos' %}">Crear Cursos</a>
+                    </li>
+                    {% endif %}
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Iniciar Sesion</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'registro' %}">Registrarse</a>
+                    </li>
+                    
+                {% endif %}
+            </ul>
+            
+            
+        </div>
     </div>
 <div class="container mt-4">
 {% block contenido %}
@@ -36,7 +64,10 @@
 <!-- Sweetalert2 v11.14.3-->
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
 
-{% block js_extras %} {% endblock %}
+{% block js_extras %} 
+    
+    
+{% endblock %}
 
 </body>
 </html>
